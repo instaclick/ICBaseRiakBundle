@@ -40,7 +40,10 @@ class ConfigurationTest extends ConfigurationTestCase
         $this->assertEquals('connection2', $configuration['buckets']['ic_bucket2']['connection']);
         $this->assertEquals('name2', $configuration['buckets']['ic_bucket2']['name']);
         $this->assertEquals(2, $configuration['buckets']['ic_bucket2']['property_list']['n_value']);
-        $this->assertEquals(true, $configuration['buckets']['ic_bucket2']['property_list']['allow_multiple']);
+        $this->assertEquals('mock_backend', $configuration['buckets']['ic_bucket2']['property_list']['backend']);
+        $this->assertTrue($configuration['buckets']['ic_bucket2']['property_list']['allow_multiple']);
+        $this->assertFalse($configuration['buckets']['ic_bucket2']['property_list']['last_write_wins']);
+        $this->assertFalse($configuration['buckets']['ic_bucket2']['property_list']['not_found_ok']);
     }
 
     /**
@@ -70,8 +73,11 @@ class ConfigurationTest extends ConfigurationTestCase
                                 'connection'    => 'connection2',
                                 'name'          => 'name2',
                                 'property_list' => array(
-                                    'n_value'        => 2,
-                                    'allow_multiple' => true,
+                                    'backend'         => 'mock_backend',
+                                    'n_value'         => 2,
+                                    'allow_multiple'  => true,
+                                    'last_write_wins' => false,
+                                    'not_found_ok'    => false
                                 ),
                             ),
                         ),

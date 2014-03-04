@@ -137,6 +137,18 @@ class ICBaseRiakExtension extends Extension
                 )
             );
 
+            if (isset($bucketConfig['property_list']['backend'])) {
+                $bucketPropertyListDefinition->addMethodCall('setBackend', array($bucketConfig['property_list']['backend']));
+            }
+
+            if (isset($bucketConfig['property_list']['last_write_wins'])) {
+                $bucketPropertyListDefinition->addMethodCall('setLastWriteWins', array($bucketConfig['property_list']['last_write_wins']));
+            }
+
+            if (isset($bucketConfig['property_list']['not_found_ok'])) {
+                $bucketPropertyListDefinition->addMethodCall('setNotFoundOk', array($bucketConfig['property_list']['not_found_ok']));
+            }
+
             $this->container->setDefinition($bucketPropertyListServiceId, $bucketPropertyListDefinition);
 
             // Scheduling call to Bucket
