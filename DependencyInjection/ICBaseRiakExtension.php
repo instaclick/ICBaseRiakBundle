@@ -20,6 +20,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Kinn Coelho Julião <kinnj@nationalfibre.net>
  * @author Guilherme Blanco <gblanco@nationalfibre.net>
  * @author Anthon Pang <anthonp@nationalfibre.net>
+ * @author Fabio B.Silva <fabios@nationalfibre.net>
  */
 class ICBaseRiakExtension extends Extension
 {
@@ -88,19 +89,19 @@ class ICBaseRiakExtension extends Extension
 
         foreach ($bucketList as $bucketKey => $bucketConfig) {
             // Connection
-            $connectionName      = ($bucketConfig['connection'])
+            $bucketConfig['name'] = $bucketConfig['name'] ?: $bucketKey;
+            $connectionName       = ($bucketConfig['connection'])
                 ? sprintf('%s.connection.%s', $bundleAlias, $bucketConfig['connection'])
                 : sprintf('%s.default_connection', $bundleAlias);
             $connectionReference = new Reference($connectionName);
 
             // Bucket
             $bucketServiceId  = sprintf('%s.bucket.%s', $bundleAlias, $bucketKey);
-            $bucketName       = $bucketConfig['name'] ?: $bucketKey;
             $bucketDefinition = new Definition(
                 $bucketServiceClass,
                 array(
                     $connectionReference,
-                    $bucketName
+                    $bucketConfig['name'],
                 )
             );
 
