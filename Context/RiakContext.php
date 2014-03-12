@@ -48,10 +48,16 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
      * Clears a Riak bucket by a given name
      *
      * @param string $bucket
+     *
+     * @return string
      */
     public function clearSingleBucket($bucket)
     {
-        $this->clearBucketByServiceId(self::RIAK_SERVICE_PREFIX . $bucket);
+        $serviceId = self::RIAK_SERVICE_PREFIX . $bucket;
+
+        $this->clearBucketByServiceId($serviceId);
+
+        return $serviceId;
     }
 
     /**
@@ -80,7 +86,7 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
         $idList         = $this->kernel->getContainer()->getServiceIds();
 
         foreach ($idList as $id) {
-            if (preg_match('/^ic_base_riak.bucket./', $id, $matches)) {
+            if (preg_match('/^' . self::RIAK_SERVICE_PREFIX . '/', $id, $matches)) {
                 $riakBucketList->add($id);
             }
         }
@@ -96,5 +102,26 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
     public function clearTheCache()
     {
         $this->clearRiak();
+    }
+
+    /**
+     * Clears the bucket
+     *
+     * @param string $bucket
+     *
+     * @When /^(?:|I )clear the bucket "([^"]*)"$/
+     */
+    public function clearTheBucket($bucket)
+    {
+        $serviceId = $this->clearSingleBucket($bucket);
+        $that      = $this;
+
+        $this->getMainContext()->getSubContext('SpinCommandContext')->spin(function () use ($that, $serviceId) {
+            $keyList = $that->kernel->getContainer()->get($serviceId)->getKeyList();
+
+            if ( ! empty($keyList)) {
+                throw new \Exception('The bucket could not be cleared.');
+            }
+        });
     }
 }
