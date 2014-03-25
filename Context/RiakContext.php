@@ -114,10 +114,9 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
     public function clearTheBucket($bucket)
     {
         $serviceId = $this->clearSingleBucket($bucket);
-        $that      = $this;
 
-        $this->getMainContext()->getSubContext('SpinCommandContext')->spin(function () use ($that, $serviceId) {
-            $keyList = $that->kernel->getContainer()->get($serviceId)->getKeyList();
+        $this->getMainContext()->getSubContext('SpinCommandContext')->spin(function () use ($serviceId) {
+            $keyList = $this->kernel->getContainer()->get($serviceId)->getKeyList();
 
             if ( ! empty($keyList)) {
                 throw new \Exception('The bucket could not be cleared.');
