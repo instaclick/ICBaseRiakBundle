@@ -43,7 +43,7 @@ class ICBaseRiakExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $this->createConnectionDefinition($config['connections'], $config['default_connection']);
-        $this->createBucketDefinition($config['buckets']);
+        $this->createBucketDefinition($config['buckets'], $config['default_namespace']);
     }
 
     /**
@@ -80,9 +80,10 @@ class ICBaseRiakExtension extends Extension
     /**
      * Create list of Bucket definition
      *
-     * @param array $bucketList
+     * @param array  $bucketList
+     * @param string $prefix
      */
-    private function createBucketDefinition(array $bucketList)
+    private function createBucketDefinition(array $bucketList, $prefix)
     {
         $bundleAlias        = $this->getAlias();
         $bucketServiceClass = $this->container->getParameter(sprintf('%s.class.bucket', $bundleAlias));
@@ -104,6 +105,8 @@ class ICBaseRiakExtension extends Extension
                     $bucketConfig['name'],
                 )
             );
+
+            $bucketDefinition->addMethodCall('setPrefix', array($prefix));
 
             $bucketDefinition->addTag("ic_base_riak.bucket");
 
