@@ -21,7 +21,7 @@ class Bucket extends RiakBucket
     private $prefix;
 
     /**
-     * Add a cache provider service to the stack.
+     * Set the prefix to be used for riak keys.
      *
      * @param string $prefix
      */
