@@ -20,7 +20,7 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
     const RIAK_SERVICE_PREFIX = 'ic_base_riak.bucket.';
 
     /**
-     * @var KernelInterface Kernel
+     * @var \Symfony\Component\HttpKernel\KernelInterface
      */
     private $kernel;
 
