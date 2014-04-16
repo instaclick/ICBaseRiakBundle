@@ -106,7 +106,9 @@ class ICBaseRiakExtension extends Extension
                 )
             );
 
-            $bucketDefinition->addMethodCall('setPrefix', array($prefix));
+            if ($prefix) {
+                $bucketDefinition->addMethodCall('setPrefix', array($prefix));
+            }
 
             $bucketDefinition->addTag("ic_base_riak.bucket");
 
