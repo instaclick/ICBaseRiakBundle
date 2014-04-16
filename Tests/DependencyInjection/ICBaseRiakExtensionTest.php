@@ -84,7 +84,7 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
             array(
                 array(
                     'default_connection' => 'default',
-                    'default_namespace'  => '',
+                    'default_namespace'  => 'user1_',
                     'connections' => array(
                         'default' => array(
                             'host' => 'application-cache',
