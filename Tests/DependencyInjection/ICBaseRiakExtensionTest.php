@@ -52,7 +52,7 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
 
         $riakBucket = $this->container->getDefinition($riakBucketId);
 
-        $this->assertDICDefinitionClass($riakBucket, 'Riak\Bucket');
+        $this->assertDICDefinitionClass($riakBucket, 'IC\Bundle\Base\RiakBundle\Riak\Bucket');
         $this->assertDICConstructorArguments($riakBucket, array($riakConnectionReference , 'mock_bucket_name'));
 
         //PropertyList
@@ -69,7 +69,8 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
 
         $this->assertDICDefinitionClass($riakBucketPropertyList, 'Riak\BucketPropertyList');
         $this->assertDICConstructorArguments($riakBucketPropertyList, array('mock value' , true));
-        $this->assertDICDefinitionMethodCallAt(0, $riakBucket, 'setPropertyList', array($riakBucketPropertyListReference));
+        $this->assertDICDefinitionMethodCallAt(0, $riakBucket, 'setPrefix', array($config['default_namespace']));
+        $this->assertDICDefinitionMethodCallAt(1, $riakBucket, 'setPropertyList', array($riakBucketPropertyListReference));
     }
 
     /**
@@ -83,6 +84,7 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
             array(
                 array(
                     'default_connection' => 'default',
+                    'default_namespace'  => 'user1_',
                     'connections' => array(
                         'default' => array(
                             'host' => 'application-cache',

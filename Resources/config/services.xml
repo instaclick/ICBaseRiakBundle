@@ -6,8 +6,8 @@
 
     <parameters>
         <parameter key="ic_base_riak.class.connection">Riak\Connection</parameter>
-        <parameter key="ic_base_riak.class.bucket">Riak\Bucket</parameter>
+        <parameter key="ic_base_riak.class.bucket">IC\Bundle\Base\RiakBundle\Riak\Bucket</parameter>
         <parameter key="ic_base_riak.class.bucket_property_list">Riak\BucketPropertyList</parameter>
     </parameters>
-    
+
 </container>
