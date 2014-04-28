@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Guilherme Blanco <gblanco@nationalfibre.net>
  * @author Anthon Pang <anthonp@nationalfibre.net>
  * @author Fabio B.Silva <fabios@nationalfibre.net>
+ * @author David Maignan <davidm@nationalfibre.net>
  */
 class ICBaseRiakExtension extends Extension
 {
@@ -44,6 +45,8 @@ class ICBaseRiakExtension extends Extension
 
         $this->createConnectionDefinition($config['connections'], $config['default_connection']);
         $this->createBucketDefinition($config['buckets'], $config['default_namespace']);
+
+        $container->setParameter('ic_base_riak.buckets', $config['buckets']);
     }
 
     /**
@@ -113,52 +116,6 @@ class ICBaseRiakExtension extends Extension
             $bucketDefinition->addTag("ic_base_riak.bucket");
 
             $this->container->setDefinition($bucketServiceId, $bucketDefinition);
-
-            // Bucket Property list
-            $this->createBucketPropertyListDefinition($bucketDefinition, $bucketConfig);
-        }
-    }
-
-    /**
-     * Create Bucket Property List definition and assign to corresponding Bucket automatically.
-     *
-     * @param \Symfony\Component\DependencyInjection\Definition $bucketDefinition
-     * @param array                                             $bucketConfig
-     */
-    private function createBucketPropertyListDefinition(Definition $bucketDefinition, array $bucketConfig)
-    {
-        $bundleAlias                    = $this->getAlias();
-        $bucketPropertyListServiceClass = $this->container->getParameter(sprintf('%s.class.bucket_property_list', $bundleAlias));
-
-        // Bucket Property list
-        if (isset($bucketConfig['property_list'])) {
-            $bucketPropertyListConfig     = $bucketConfig['property_list'];
-            $bucketPropertyListServiceId  = sprintf('%s.property_list.%s', $bundleAlias, $bucketConfig['name']);
-            $bucketPropertyListReference  = new Reference($bucketPropertyListServiceId);
-            $bucketPropertyListDefinition = new Definition(
-                $bucketPropertyListServiceClass,
-                array(
-                    $bucketPropertyListConfig['n_value'],
-                    $bucketPropertyListConfig['allow_multiple']
-                )
-            );
-
-            if (isset($bucketConfig['property_list']['backend'])) {
-                $bucketPropertyListDefinition->addMethodCall('setBackend', array($bucketConfig['property_list']['backend']));
-            }
-
-            if (isset($bucketConfig['property_list']['last_write_wins'])) {
-                $bucketPropertyListDefinition->addMethodCall('setLastWriteWins', array($bucketConfig['property_list']['last_write_wins']));
-            }
-
-            if (isset($bucketConfig['property_list']['not_found_ok'])) {
-                $bucketPropertyListDefinition->addMethodCall('setNotFoundOk', array($bucketConfig['property_list']['not_found_ok']));
-            }
-
-            $this->container->setDefinition($bucketPropertyListServiceId, $bucketPropertyListDefinition);
-
-            // Scheduling call to Bucket
-            $bucketDefinition->addMethodCall('setPropertyList', array($bucketPropertyListReference));
         }
     }
 }

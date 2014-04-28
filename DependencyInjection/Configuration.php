@@ -120,7 +120,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-                ->booleanNode('allow_multiple')
+                ->booleanNode('allow_mult')
                     ->defaultFalse()
                 ->end()
                 ->booleanNode('last_write_wins')
