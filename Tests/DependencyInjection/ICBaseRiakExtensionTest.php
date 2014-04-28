@@ -54,23 +54,6 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
 
         $this->assertDICDefinitionClass($riakBucket, 'IC\Bundle\Base\RiakBundle\Riak\Bucket');
         $this->assertDICConstructorArguments($riakBucket, array($riakConnectionReference , 'mock_bucket_name'));
-
-        //PropertyList
-        $riakBucketPropertyListId        = 'ic_base_riak.property_list.mock_bucket_name';
-        $riakBucketPropertyListReference = new Reference($riakBucketPropertyListId);
-
-        $this->assertHasDefinition($riakBucketPropertyListId);
-
-        $riakBucketPropertyList = $this->container->getDefinition($riakBucketPropertyListId);
-
-        $this->assertDICDefinitionMethodCallAt(0, $riakBucketPropertyList, 'setBackend', array($config['buckets']['ic_bucket']['property_list']['backend']));
-        $this->assertDICDefinitionMethodCallAt(1, $riakBucketPropertyList, 'setLastWriteWins', array($config['buckets']['ic_bucket']['property_list']['last_write_wins']));
-        $this->assertDICDefinitionMethodCallAt(2, $riakBucketPropertyList, 'setNotFoundOk', array($config['buckets']['ic_bucket']['property_list']['not_found_ok']));
-
-        $this->assertDICDefinitionClass($riakBucketPropertyList, 'Riak\BucketPropertyList');
-        $this->assertDICConstructorArguments($riakBucketPropertyList, array('mock value' , true));
-        $this->assertDICDefinitionMethodCallAt(0, $riakBucket, 'setPrefix', array($config['default_namespace']));
-        $this->assertDICDefinitionMethodCallAt(1, $riakBucket, 'setPropertyList', array($riakBucketPropertyListReference));
     }
 
     /**
@@ -94,14 +77,7 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
                     'buckets' => array(
                         'ic_bucket' => array(
                             'connection' => 'default',
-                            'name'       => 'mock_bucket_name',
-                            'property_list' => array(
-                                'backend'         => 'mock_backend',
-                                'n_value'         => 'mock value',
-                                'allow_multiple'  => true,
-                                'last_write_wins' => false,
-                                'not_found_ok'    => false
-                            )
+                            'name'       => 'mock_bucket_name'
                         )
                     ),
                 )
@@ -152,11 +128,6 @@ class ICBaseRiakExtensionTest extends ExtensionTestCase
                         'ic_bucket' => array(
                             'connection' => 'default',
                             'name'       => 'mock_bucket_name',
-                            'property_list' => array(
-                                'backend'        => 'mock_backend',
-                                'n_value'        => 'mock value',
-                                'allow_multiple' => true
-                            )
                         )
                     ),
                 )

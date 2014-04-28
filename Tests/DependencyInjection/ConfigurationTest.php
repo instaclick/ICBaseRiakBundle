@@ -41,7 +41,7 @@ class ConfigurationTest extends ConfigurationTestCase
         $this->assertEquals('name2', $configuration['buckets']['ic_bucket2']['name']);
         $this->assertEquals(2, $configuration['buckets']['ic_bucket2']['property_list']['n_value']);
         $this->assertEquals('mock_backend', $configuration['buckets']['ic_bucket2']['property_list']['backend']);
-        $this->assertTrue($configuration['buckets']['ic_bucket2']['property_list']['allow_multiple']);
+        $this->assertTrue($configuration['buckets']['ic_bucket2']['property_list']['allow_mult']);
         $this->assertFalse($configuration['buckets']['ic_bucket2']['property_list']['last_write_wins']);
         $this->assertFalse($configuration['buckets']['ic_bucket2']['property_list']['not_found_ok']);
     }
@@ -75,7 +75,7 @@ class ConfigurationTest extends ConfigurationTestCase
                                 'property_list' => array(
                                     'backend'         => 'mock_backend',
                                     'n_value'         => 2,
-                                    'allow_multiple'  => true,
+                                    'allow_mult'  => true,
                                     'last_write_wins' => false,
                                     'not_found_ok'    => false
                                 ),
