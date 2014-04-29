@@ -75,7 +75,7 @@ class ConfigurationTest extends ConfigurationTestCase
                                 'property_list' => array(
                                     'backend'         => 'mock_backend',
                                     'n_value'         => 2,
-                                    'allow_mult'  => true,
+                                    'allow_mult'      => true,
                                     'last_write_wins' => false,
                                     'not_found_ok'    => false
                                 ),

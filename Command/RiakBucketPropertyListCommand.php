@@ -36,7 +36,7 @@ class RiakBucketPropertyListCommand extends ContainerAwareCommand
     {
         $output->writeln("Set riak buckets property list");
 
-        $riackBucketService = $this->getContainer()->get('ic_base_riak.bucket.service');
+        $riackBucketService = $this->getContainer()->get('ic_base_riak.property_list.service');
 
         $riackBucketService->execute();
     }

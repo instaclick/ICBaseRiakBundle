@@ -10,7 +10,7 @@
     </parameters>
 
     <services>
-        <service id="ic_base_riak.bucket.service" class="IC\Bundle\Base\RiakBundle\Service\Command\RiakBucketPropertyListService">
+        <service id="ic_base_riak.property_list.service" class="IC\Bundle\Base\RiakBundle\Service\Command\RiakBucketPropertyListService">
             <call method="setBucketPropertyList">
                 <argument type="string">%ic_base_riak.buckets%</argument>
             </call>
@@ -18,5 +18,7 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="ic_base_riak.service.status.client" class="Guzzle\Http\Client" />
     </services>
 </container>

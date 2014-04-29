@@ -10,10 +10,17 @@ use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
+//
+// Require 3rd-party libraries here:
+//
+require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
+
 /**
  * RiakContext
  *
  * @author Mohib Malgi <mohibm@nationalfibre.net>
+ * @author David Maignan <davidm@nationalfibre.net>
  */
 class RiakContext extends RawMinkContext implements KernelAwareInterface
 {
@@ -122,5 +129,146 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
                 throw new \Exception('The bucket could not be cleared.');
             }
         });
+    }
+
+    /**
+     * Set property for a bucket
+     *
+     * @param string $property
+     * @param string $value
+     * @param string $bucketName
+     *
+     * @throws \Exception
+     *
+     * @Given /^I set {([^}]+)} with "([^"]*)" for bucket "([^"]*)"$/
+     */
+    public function iSetPropertyForBucket($property, $value, $bucketName)
+    {
+        $response = $this->postBucketPropertyList($bucketName, $property, $value);
+
+        if ($response->getStatusCode() !== 204) {
+            throw new \Exception(sprintf("Request failed to set the property %s for the bucket %s", $property, $bucketName));
+        }
+
+        //Check the value is set
+        $response     = $this->getBucketPropertyList($bucketName);
+
+        $propertyList  = json_decode($response->getBody(true), true);
+        $key           = $this->getMatchingKey(array_keys($propertyList['props']), $property);
+        $propertyValue = $propertyList['props'][$key];
+
+        assertEquals($value, $propertyValue);
+    }
+
+    /**
+     * Check default value for bucket property
+     *
+     * @param string $property
+     * @param string $bucketName
+     *
+     * @Then /^I should check the configured {([^}]+)} for bucket "([^"]*)"$/
+     */
+    public function iShouldCheckPropertyConfigurationValueForBucket($property, $bucketName)
+    {
+        $bucketList    = $this->getContainerParameter('ic_base_riak.buckets');
+        $defaultValue  = $bucketList[$bucketName]['property_list'][$property];
+        $response      = $this->getBucketPropertyList($bucketName);
+        $propertyList  = json_decode($response->getBody(true), true);
+        $key           = $this->getMatchingKey(array_keys($propertyList['props']), $property);
+        $propertyValue = $propertyList['props'][$key];
+
+        assertEquals($defaultValue, $propertyValue);
+    }
+
+    /**
+     * Match the keys names returned from riak and the properties configured in the application
+     *
+     * @param array  $keys
+     * @param string $value
+     *
+     * @return mixed
+     */
+    private function getMatchingKey($keys, $value)
+    {
+        foreach ($keys as $key) {
+            if (preg_match("/^$key/", $value) === 1) {
+                return $key;
+            }
+        }
+    }
+
+    /**
+     * Generate bucket property list url
+     *
+     * @param string $bucketName
+     *
+     * @return string
+     */
+    private function generateBucketPropertyListUrl($bucketName)
+    {
+        return sprintf("http://%s:%d/buckets/%s/props", $this->getContainerParameter('cache_host'), 8098, $bucketName);
+    }
+
+    /**
+     * Post request to set property for a specific bucket
+     *
+     * @param string $bucketName
+     * @param string $property
+     * @param string $value
+     *
+     * @return \Guzzle\Http\Message\Response
+     */
+    private function postBucketPropertyList($bucketName, $property, $value)
+    {
+        $request = $this->getServiceById('ic_base_riak.service.status.client')->createRequest(
+            "PUT",
+            $this->generateBucketPropertyListUrl($bucketName),
+            array(
+                'Content-Type' => 'application/json'
+            ),
+            sprintf('{"props":{"%s":"%s"}}', $property, $value)
+        );
+
+        return $request->send();
+    }
+
+
+    /**
+     * Send get request for bucket property list
+     *
+     * @param string $bucketName
+     *
+     * @return \Guzzle\Http\Message\Response
+     */
+    private function getBucketPropertyList($bucketName)
+    {
+        $url     = $this->generateBucketPropertyListUrl($bucketName);
+        $request = $this->getServiceById('ic_base_riak.service.status.client')->createRequest("GET", $url);
+
+        return $request->send();
+    }
+
+    /**
+     * Get service by id
+     *
+     * @param string $id
+     *
+     * @return mixed
+     */
+    private function getServiceById($id)
+    {
+        return $this->kernel->getContainer()->get($id);
+    }
+
+    /**
+     * Get a the value for a container parameter
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    private function getContainerParameter($name)
+    {
+        return $this->kernel->getContainer()->getParameter($name);
     }
 }

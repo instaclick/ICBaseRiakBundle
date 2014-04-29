@@ -69,18 +69,17 @@ class RiakBucketPropertyListService
      */
     public function execute()
     {
-        foreach ($this->getBucketPropertyList() as $bucketName => $value) {
+        foreach ($this->getBucketPropertyList() as $bucketKey => $bucketConfig) {
+            $bucketService = $this->getRiakBucketService($bucketKey);
 
-            $bucketService = $this->getRiakBucketService($bucketName);
-
-            if (isset($value['property_list'])) {
+            if (isset($bucketConfig['property_list'])) {
                 $bucketPropertyListClass = $this->getBucketPropertyListClass();
                 $bucketPropertyList      = new $bucketPropertyListClass();
 
-                foreach ($value['property_list'] as $key => $value) {
+                foreach ($bucketConfig['property_list'] as $key => $bucketConfig) {
                     $method = $this->normalizeName($key);
 
-                    $bucketPropertyList->$method($value);
+                    $bucketPropertyList->$method($bucketConfig);
                 }
 
                 $bucketService->setPropertyList($bucketPropertyList);
@@ -121,8 +120,8 @@ class RiakBucketPropertyListService
      */
     private function normalizeName($name)
     {
-        $name = (preg_replace('/([a-z])_([a-z])/e', '"$1".ucfirst("$2")', $name));
+        $methodName = array_map('ucfirst', explode('_', $name));
 
-        return 'set' . ucfirst($name);
+        return sprintf('set%s', implode('', $methodName));
     }
 }
