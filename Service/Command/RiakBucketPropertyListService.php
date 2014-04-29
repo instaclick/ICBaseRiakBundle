@@ -76,10 +76,10 @@ class RiakBucketPropertyListService
                 $bucketPropertyListClass = $this->getBucketPropertyListClass();
                 $bucketPropertyList      = new $bucketPropertyListClass();
 
-                foreach ($bucketConfig['property_list'] as $key => $bucketConfig) {
-                    $method = $this->normalizeName($key);
+                foreach ($bucketConfig['property_list'] as $propertyKey => $propertyValue) {
+                    $method = $this->normalizeName($propertyKey);
 
-                    $bucketPropertyList->$method($bucketConfig);
+                    $bucketPropertyList->$method($propertyValue);
                 }
 
                 $bucketService->setPropertyList($bucketPropertyList);
