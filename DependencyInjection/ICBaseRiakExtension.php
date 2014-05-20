@@ -41,7 +41,7 @@ class ICBaseRiakExtension extends Extension
         $loader->load('services.xml');
 
         $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config        = $this->processConfiguration($configuration, $configs);
 
         $this->createConnectionDefinition($config['connections'], $config['default_connection']);
         $this->createBucketDefinition($config['buckets'], $config['default_namespace']);

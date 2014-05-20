@@ -7,8 +7,8 @@ namespace IC\Bundle\Base\RiakBundle\Context;
 
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 //
 // Require 3rd-party libraries here:
@@ -151,8 +151,7 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
         }
 
         //Check the value is set
-        $response     = $this->getBucketPropertyList($bucketName);
-
+        $response      = $this->getBucketPropertyList($bucketName);
         $propertyList  = json_decode($response->getBody(true), true);
         $key           = $this->getMatchingKey(array_keys($propertyList['props']), $property);
         $propertyValue = $propertyList['props'][$key];

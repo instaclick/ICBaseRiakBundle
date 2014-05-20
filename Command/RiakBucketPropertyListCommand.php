@@ -6,10 +6,7 @@
 namespace IC\Bundle\Base\RiakBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -25,8 +22,7 @@ class RiakBucketPropertyListCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('ic:base:riak:bucket:declare')
-            ->setDescription('Riak command to declare the buckets properties')
-        ;
+             ->setDescription('Riak command to declare the buckets properties');
     }
 
     /**
@@ -37,7 +33,6 @@ class RiakBucketPropertyListCommand extends ContainerAwareCommand
         $output->writeln("Set riak buckets property list");
 
         $riakBucketService = $this->getContainer()->get('ic_base_riak.property_list.service');
-
         $riakBucketService->execute();
     }
 }

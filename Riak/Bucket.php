@@ -38,8 +38,8 @@ class Bucket extends RiakBucket
         $object->setKey(sprintf('%s%s', $this->prefix, $object->getKey()));
 
         return $putInput
-          ? parent::put($object, $putInput)
-          : parent::put($object);
+            ? parent::put($object, $putInput)
+            : parent::put($object);
     }
 
     /**
@@ -50,7 +50,7 @@ class Bucket extends RiakBucket
         $key = sprintf('%s%s', $this->prefix, $key);
 
         return $getInput
-          ? parent::get($key, $getInput)
-          : parent::get($key);
+            ? parent::get($key, $getInput)
+            : parent::get($key);
     }
 }
