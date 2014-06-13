@@ -31,11 +31,34 @@ class Bucket extends RiakBucket
     }
 
     /**
+     * Get the prefix key
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    public function getPrefixKey($key)
+    {
+        if ($this->prefix == null) {
+            return $key;
+        }
+
+        $size   = strlen($this->prefix);
+        $prefix = $this->prefix;
+
+        if (substr($key, 0, $size) === $prefix) {
+            return $key;
+        }
+
+        return sprintf('%s%s', $this->prefix, $key);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function put($object, $putInput = null)
     {
-        $object->setKey(sprintf('%s%s', $this->prefix, $object->getKey()));
+        $object->setKey($this->getPrefixKey($object->getKey()));
 
         return $putInput
             ? parent::put($object, $putInput)
@@ -47,10 +70,40 @@ class Bucket extends RiakBucket
      */
     public function get($key, $getInput = null)
     {
-        $key = sprintf('%s%s', $this->prefix, $key);
+        $key = $this->getPrefixKey($key);
 
         return $getInput
             ? parent::get($key, $getInput)
             : parent::get($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($key, $deleteInput = null)
+    {
+        $key = $this->getPrefixKey($key);
+
+        return $deleteInput
+            ? parent::delete($key, $deleteInput)
+            : parent::delete($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getKeyList()
+    {
+        $size   = strlen($this->prefix);
+        $list   = parent::getKeyList();
+        $prefix = $this->prefix;
+
+        if ($this->prefix == null) {
+            return $list;
+        }
+
+        return array_filter($list, function ($key) use ($prefix, $size) {
+            return substr($key, 0, $size) === $prefix;
+        });
     }
 }
