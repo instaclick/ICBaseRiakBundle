@@ -9,6 +9,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Riak\Output\GetOutput;
 
 //
 // Require 3rd-party libraries here:
@@ -121,14 +122,29 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
     public function clearTheBucket($bucket)
     {
         $serviceId = $this->clearSingleBucket($bucket);
+        $service   = $this->kernel->getContainer()->get($serviceId);
 
-        $this->getMainContext()->getSubContext('SpinCommandContext')->spin(function () use ($serviceId) {
-            $keyList = $this->kernel->getContainer()->get($serviceId)->getKeyList();
+        foreach ($service->getKeyList() as $key) {
+            $this->checkResult($service->get($key));
+        }
+    }
 
-            if ( ! empty($keyList)) {
-                throw new \Exception('The bucket could not be cleared.');
+    /**
+     * Check the object list to ensure that they are all deleted
+     *
+     * @param \Riak\Output\GetOutput $result
+     *
+     * @throws \Exception
+     */
+    private function checkResult(GetOutput $result)
+    {
+        foreach ($result->getObjectList() as $object) {
+            if ($object->isDeleted()) {
+                continue;
             }
-        });
+
+            throw new \Exception('The bucket could not be cleared.');
+        }
     }
 
     /**
