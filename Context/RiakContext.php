@@ -86,7 +86,7 @@ class RiakContext extends RawMinkContext implements KernelAwareInterface
     /**
      * Retrieves collection of riak bucket ids.
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection;
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     private function getRiakBucketIdList()
     {
