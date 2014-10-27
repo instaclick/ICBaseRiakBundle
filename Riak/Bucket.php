@@ -80,9 +80,13 @@ class Bucket extends RiakBucket
     /**
      * {@inheritdoc}
      */
-    public function delete($key, $deleteInput = null)
+    public function delete($object, $deleteInput = null)
     {
-        $key = $this->getPrefixKey($key);
+        $key = $this->getPrefixKey(
+            is_object($object)
+            ? $object->getKey()
+            : $object
+        );
 
         return $deleteInput
             ? parent::delete($key, $deleteInput)
