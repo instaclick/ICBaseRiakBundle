@@ -92,6 +92,16 @@ class Bucket extends RiakBucket
     /**
      * {@inheritdoc}
      */
+    public function counter($key)
+    {
+        $key = $this->getPrefixKey($key);
+
+        return parent::get($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getKeyList()
     {
         $size   = strlen($this->prefix);
