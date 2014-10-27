@@ -100,7 +100,7 @@ class Bucket extends RiakBucket
     {
         $key = $this->getPrefixKey($key);
 
-        return parent::get($key);
+        return parent::counter($key);
     }
 
     /**
