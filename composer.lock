@@ -1,19 +1,13 @@
 {
-    "hash": "5cc0d099da22731bd005941082f5a275",
+    "hash": "6d31e11c972399fc0035e4fb1af6e7cf",
     "packages": [
         {
             "name": "doctrine/annotations",
             "version": "v1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/annotations.git",
+                "url": "http://satis/repositories/doctrine/annotations.git",
                 "reference": "v1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/v1.1",
-                "reference": "v1.1",
-                "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
@@ -72,14 +66,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/cache.git",
+                "url": "http://satis/repositories/doctrine/cache.git",
                 "reference": "b5716ea776f349a0fedcf0e7d032386c1f696f76"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/b5716ea776f349a0fedcf0e7d032386c1f696f76",
-                "reference": "b5716ea776f349a0fedcf0e7d032386c1f696f76",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -138,14 +126,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/collections.git",
+                "url": "http://satis/repositories/doctrine/collections.git",
                 "reference": "df2138bcb467533bfe6b3a01301d480aec008b93"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/df2138bcb467533bfe6b3a01301d480aec008b93",
-                "reference": "df2138bcb467533bfe6b3a01301d480aec008b93",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -205,14 +187,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/common.git",
+                "url": "http://satis/repositories/doctrine/common.git",
                 "reference": "33f906e257510247d0bcd60b8b54f47cfb51e3ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/33f906e257510247d0bcd60b8b54f47cfb51e3ed",
-                "reference": "33f906e257510247d0bcd60b8b54f47cfb51e3ed",
-                "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "1.*",
@@ -279,14 +255,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/inflector.git",
+                "url": "http://satis/repositories/doctrine/inflector.git",
                 "reference": "7314da6f9141705f0528c8b72546cb8aeea54ae8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/7314da6f9141705f0528c8b72546cb8aeea54ae8",
-                "reference": "7314da6f9141705f0528c8b72546cb8aeea54ae8",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -347,14 +317,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/lexer.git",
+                "url": "http://satis/repositories/doctrine/lexer.git",
                 "reference": "bc0e1f0cc285127a38c6c8ea88bc5dba2fd53e94"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/bc0e1f0cc285127a38c6c8ea88bc5dba2fd53e94",
-                "reference": "bc0e1f0cc285127a38c6c8ea88bc5dba2fd53e94",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
@@ -387,7 +351,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://satis/repositories/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -404,14 +368,8 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/log",
+                "url": "http://satis/repositories/psr/log.git",
                 "reference": "1.0.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
-                "reference": "1.0.0",
-                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -442,14 +400,8 @@
             "version": "2.2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/symfony.git",
+                "url": "http://satis/repositories/symfony/symfony.git",
                 "reference": "50822015a6ec0e4893a2c39950a63c8b39fa3753"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/50822015a6ec0e4893a2c39950a63c8b39fa3753",
-                "reference": "50822015a6ec0e4893a2c39950a63c8b39fa3753",
-                "shasum": ""
             },
             "require": {
                 "doctrine/common": ">=2.2,<3.0",
@@ -541,14 +493,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig.git",
+                "url": "http://satis/repositories/twig/twig.git",
                 "reference": "399916916533589c95dc04e1afd4aeefa34928ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/399916916533589c95dc04e1afd4aeefa34928ad",
-                "reference": "399916916533589c95dc04e1afd4aeefa34928ad",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
@@ -592,14 +538,8 @@
             "version": "1.2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "url": "http://satis/repositories/phpunit/php-code-coverage.git",
                 "reference": "1.2.9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1.2.9",
-                "reference": "1.2.9",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -632,7 +572,7 @@
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
-            "homepage": "https://github.com/sebastianbergmann/php-code-coverage",
+            "homepage": "http://satis/repositories/sebastianbergmann/php-code-coverage",
             "keywords": [
                 "coverage",
                 "testing",
@@ -645,14 +585,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
+                "url": "http://satis/repositories/phpunit/php-file-iterator.git",
                 "reference": "2deb24c65ea78e126daa8d45b2089ddc29ec1d26"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/2deb24c65ea78e126daa8d45b2089ddc29ec1d26",
-                "reference": "2deb24c65ea78e126daa8d45b2089ddc29ec1d26",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -678,7 +612,7 @@
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
-            "homepage": "https://github.com/sebastianbergmann/php-file-iterator/",
+            "homepage": "http://satis/repositories/sebastianbergmann/php-file-iterator/",
             "keywords": [
                 "filesystem",
                 "iterator"
@@ -690,14 +624,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-text-template.git",
+                "url": "http://satis/repositories/phpunit/php-text-template.git",
                 "reference": "1eeef106193d2f8c539728e566bb4793071a9e18"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/1eeef106193d2f8c539728e566bb4793071a9e18",
-                "reference": "1eeef106193d2f8c539728e566bb4793071a9e18",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -723,7 +651,7 @@
                 }
             ],
             "description": "Simple template engine.",
-            "homepage": "https://github.com/sebastianbergmann/php-text-template/",
+            "homepage": "http://satis/repositories/sebastianbergmann/php-text-template/",
             "keywords": [
                 "template"
             ],
@@ -734,14 +662,8 @@
             "version": "1.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-timer.git",
+                "url": "http://satis/repositories/phpunit/php-timer.git",
                 "reference": "ecf7920b27003a9412b07dad79dbb5ad1249e6c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/ecf7920b27003a9412b07dad79dbb5ad1249e6c3",
-                "reference": "ecf7920b27003a9412b07dad79dbb5ad1249e6c3",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -767,7 +689,7 @@
                 }
             ],
             "description": "Utility class for timing",
-            "homepage": "https://github.com/sebastianbergmann/php-timer/",
+            "homepage": "http://satis/repositories/sebastianbergmann/php-timer/",
             "keywords": [
                 "timer"
             ],
@@ -778,14 +700,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
+                "url": "http://satis/repositories/phpunit/php-token-stream.git",
                 "reference": "c25dd88e1592e66dee2553c99ef244203d5a1b98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/c25dd88e1592e66dee2553c99ef244203d5a1b98",
-                "reference": "c25dd88e1592e66dee2553c99ef244203d5a1b98",
-                "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -812,7 +728,7 @@
                 }
             ],
             "description": "Wrapper around PHP's tokenizer extension.",
-            "homepage": "https://github.com/sebastianbergmann/php-token-stream/",
+            "homepage": "http://satis/repositories/sebastianbergmann/php-token-stream/",
             "keywords": [
                 "tokenizer"
             ],
@@ -823,14 +739,8 @@
             "version": "3.7.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "url": "http://satis/repositories/phpunit/phpunit.git",
                 "reference": "3.7.19"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3.7.19",
-                "reference": "3.7.19",
-                "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
@@ -897,14 +807,8 @@
             "version": "1.2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
+                "url": "http://satis/repositories/phpunit/phpunit-mock-objects.git",
                 "reference": "d49b5683200b5db9b1c64cb06f52f50d147891c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/d49b5683200b5db9b1c64cb06f52f50d147891c4",
-                "reference": "d49b5683200b5db9b1c64cb06f52f50d147891c4",
-                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -934,7 +838,7 @@
                 }
             ],
             "description": "Mock Object library for PHPUnit",
-            "homepage": "https://github.com/sebastianbergmann/phpunit-mock-objects/",
+            "homepage": "http://satis/repositories/sebastianbergmann/phpunit-mock-objects/",
             "keywords": [
                 "mock",
                 "xunit"
